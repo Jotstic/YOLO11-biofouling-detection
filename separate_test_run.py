@@ -21,7 +21,7 @@ GT_DIR  = f"{DATASET_ROOT}/labels/test"
 
 # ✅ Put EVERYTHING under this root
 RUNS_ROOT = "/Users/jot/Documents/MASTEROPPGAVE/Separate test runs"
-RUN_NAME  = "Test Batch Run 832"  # folder inside RUNS_ROOT
+RUN_NAME  = ""  # folder inside RUNS_ROOT
 
 OUTPUT_ROOT = os.path.join(RUNS_ROOT, RUN_NAME)
 
@@ -33,7 +33,7 @@ METRIC_TXT = os.path.join(OUTPUT_ROOT, "metrics.txt")
 CLASS_COUNT_PATH = os.path.join(OUTPUT_ROOT, "class_counts.csv")
 CLASS_METRIC_CSV = os.path.join(OUTPUT_ROOT, "metrics_per_class.csv")
 
-IMGSZ = (832, 832)
+IMGSZ = (640)
 CONF_PRED_SAVE = 0.25  # set to e.g. 0.25 to reduce low-conf predictions in saved labels
 
 # ============================================================
@@ -42,8 +42,8 @@ CONF_PRED_SAVE = 0.25  # set to e.g. 0.25 to reduce low-conf predictions in save
 
 def ensure_exists(path, name):
     if not os.path.exists(path):
-        raise FileNotFoundError(f"❌ Missing {name}: {path}")
-    print(f"✅ Found {name}: {path}")
+        raise FileNotFoundError(f"x Missing {name}: {path}")
+    print(f"Found {name}: {path}")
 
 def read_yaml_names_and_nc(yaml_path):
     with open(yaml_path, "r") as f:
@@ -149,7 +149,7 @@ def main():
     # ---- load model ----
     print("Loading model...")
     model = YOLO(MODEL_PATH)
-    print("✅ Model loaded.\n")
+    print(" Model loaded.\n")
 
     # ---- predict (save txt) ----
     print("Running prediction on test images...\n")
@@ -183,7 +183,7 @@ def main():
                     os.remove(dst)
                 shutil.move(src, dst)
 
-    print(f"✅ Prediction labels saved to: {PRED_DIR}\n")
+    print(f"Prediction labels saved to: {PRED_DIR}\n")
 
     # ---- evaluate ----
     print("Evaluating model...\n")
@@ -245,7 +245,7 @@ def main():
                 f"  mAP50-95:   {row['mAP50-95']:.4f}\n"
             )
 
-    print("✅ Metrics saved:")
+    print("Metrics saved:")
     print("  -", METRIC_CSV)
     print("  -", CLASS_METRIC_CSV)
     print("  -", METRIC_TXT)
@@ -278,7 +278,7 @@ def main():
         "pred_count": [pred_counts[i] for i in range(nc)],
     })
     df_counts.to_csv(CLASS_COUNT_PATH, index=False)
-    print("✅ Counts saved to:", CLASS_COUNT_PATH, "\n")
+    print("Counts saved to:", CLASS_COUNT_PATH, "\n")
 
     # ---- comparison images ----
     print("Creating comparison images (GT left / Pred right)...\n")
@@ -298,7 +298,7 @@ def main():
         combined = np.hstack([left, right])
         cv2.imwrite(os.path.join(COMP_DIR, f"{stem}_compare.jpg"), combined)
 
-    print("✅ Comparison images saved to:", COMP_DIR)
+    print("Comparison images saved to:", COMP_DIR)
     print("\n### FULL EVALUATION COMPLETE ###")
     print("All outputs under:", OUTPUT_ROOT)
 
