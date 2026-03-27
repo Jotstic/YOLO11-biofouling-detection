@@ -2,10 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# -----------------------------
-# Dataset class distribution
-# -----------------------------
-
+#Complete_Dataset_1 composition. 
 df = pd.DataFrame({
     "Fish":        {"Train": 2778, "Val": 584,  "Test": 621},
     "Red Algae":   {"Train": 305,  "Val": 38,   "Test": 48},
@@ -14,16 +11,9 @@ df = pd.DataFrame({
     "Cyanea Capillata":   {"Train": 27,   "Val": 23,   "Test": 10},
 }).T
 
-#df = pd.DataFrame({
-   #"Fish":        {"Train": 0, "Val": 0,  "Test": 119},
-   #"Red Algae":   {"Train": 0,  "Val": 0,   "Test": 69},
-   #"Algae":       {"Train": 0, "Val": 0, "Test": 308},
-   #"Hydroids":    {"Train": 0, "Val": 0,  "Test": 99},
-   #"Jellyfish":   {"Train": 0,   "Val": 0,   "Test": 59},
-#}).T
-
+#Dataset splits
 splits = ["Train", "Val", "Test"]
-df = df[splits]  # reorder columns
+df = df[splits] 
 
 # Colors for each split
 colors = {
@@ -32,9 +22,8 @@ colors = {
     "Test":  "#009E73",  # green
 }
 
-# -----------------------------
+
 # Plotting function
-# -----------------------------
 def stacked(ax, d, title, ymax=None):
     x = np.arange(len(d.index))
     bottom = np.zeros(len(d.index))
@@ -66,9 +55,8 @@ def stacked(ax, d, title, ymax=None):
     if ymax is not None:
         ax.set_ylim(0, ymax)
 
-# -----------------------------
+
 # Create figure
-# -----------------------------
 fig, ax = plt.subplots(figsize=(10, 6))
 
 stacked(ax, df, "complete_dataset_1 Composition by Class and Split")
