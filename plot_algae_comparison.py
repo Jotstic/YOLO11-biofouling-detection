@@ -48,13 +48,13 @@ def pick_algae_rows(df: pd.DataFrame, dataset_tag: str) -> list[dict]:
     df = df.copy()
     df["_class_norm"] = df["class_name"].astype(str).map(norm)
 
-    # ---- dataset_algae: one merged algae class ("Algae")
+    # dataset_algae: one merged algae class ("Algae")
     if dataset_tag == "dataset_algae":
         mask = df["_class_norm"].isin(["algae"])
         for _, r in df[mask].iterrows():
             rows_out.append(make_row(r, "Algae (all merged)"))
 
-    # ---- complete_dataset_1: likely has "Red Algae" + merged "Algae" (brown+green)
+    # complete_dataset_1: likely has "Red Algae" + merged "Algae" (brown+green)
     elif dataset_tag == "complete_dataset_1":
         # merged brown+green class often named "Algae"
         mask_merged = df["_class_norm"].isin(["algae"])
@@ -66,7 +66,7 @@ def pick_algae_rows(df: pd.DataFrame, dataset_tag: str) -> list[dict]:
         for _, r in df[mask_red].iterrows():
             rows_out.append(make_row(r, "Red algae"))
 
-    # ---- complete_dataset: red, brown, green separate
+    # complete_dataset: red, brown, green separate
     elif dataset_tag == "complete_dataset":
         wanted = {
             "green algae": "Green algae",
