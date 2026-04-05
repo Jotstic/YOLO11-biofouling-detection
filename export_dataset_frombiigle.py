@@ -32,10 +32,9 @@ import requests
 from PIL import Image
 
 
-# =========================
+
 # Config / environment bits
-# =========================
-# (These environment variables are what I tweak from outside when I run the script)
+# These environment variables are what I tweak from outside when I run the script
 
 BASE_URL = os.getenv("BIIGLE_BASE_URL", "https://biigle.de").rstrip("/")
 
@@ -44,10 +43,10 @@ API_TOKEN = os.getenv("python")
 
 # New: allow multiple volumes via BIIGLE_VOLUME_IDS="123,456,789"
 VOLUME_IDS_STR = os.getenv("BIIGLE_VOLUME_IDS", "").strip()
-SINGLE_VOLUME_ID = int(os.getenv("BIIGLE_VOLUME_ID", "28611"))
+SINGLE_VOLUME_ID = int(os.getenv("BIIGLE_VOLUME_ID", "ID"))
 
 # Where I want the final YOLO dataset to end up
-OUT_DIR = pathlib.Path(os.getenv("OUT_DIR", "/Users/jot/Documents/MASTEROPPGAVE/test_dataset"))
+OUT_DIR = pathlib.Path(os.getenv("OUT_DIR", "out_path_to_folder"))
 
 # Fractions for global split
 TRAIN_FRAC = float(os.getenv("TRAIN_FRAC", "0.7"))   # default 70% train
@@ -61,22 +60,25 @@ if not (0.0 <= EMPTY_KEEP_FRAC <= 1.0):
 
 
 # Keep or drop images that have *zero* annotations
+
 KEEP_EMPTY = os.getenv("KEEP_EMPTY", "1").lower() not in ("0", "false", "no")
 
 # Optional global cap on number of images to process (0 means unlimited)
+
 MAX_IMAGES = int(os.getenv("MAX_IMAGES", "0"))
 
 # Default mapping (can be overridden with LABEL_MAP_JSON)
 # This is: BIIGLE label_id -> human-readable class name
+
 DEFAULT_LABEL_ID_TO_NAME: Dict[int, str] = {
     475638: "Fish",
-    # 475635: "Red Algae",
+    475635: "Red Algae",
     475636: "Green Algae",
     475637: "Brown Algae",
-    # 475639: "Jellyfish",
+    475639: "Jellyfish",
     475640: "Hydroids",
-    # 475641: "Barnacles",
-    # 475642: "Bivalves",
+    475641: "Barnacles",
+    475642: "Bivalves",
 }
 
 LABEL_MAP_JSON = os.getenv("LABEL_MAP_JSON", "").strip()
@@ -128,9 +130,9 @@ if TRAIN_FRAC <= 0 or VAL_FRAC < 0 or TRAIN_FRAC + VAL_FRAC >= 1:
 TEST_FRAC = 1.0 - TRAIN_FRAC - VAL_FRAC
 
 
-# =========================
+
 # BIIGLE API helper section
-# =========================
+
 # (These are the little helper functions I use to talk to BIIGLE)
 
 session = requests.Session()
