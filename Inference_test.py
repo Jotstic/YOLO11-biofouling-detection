@@ -7,14 +7,9 @@ import statistics
 from pathlib import Path
 
 WEIGHTS = [
-   r"/Users/jot/Documents/MASTEROPPGAVE/BEST WEIGHTS/yolo11n_Complete_dataset_1_best.pt",
-    r"/Users/jot/Documents/MASTEROPPGAVE/BEST WEIGHTS/yolo11s_Complete_dataset_1_best.pt",
-    r"/Users/jot/Documents/MASTEROPPGAVE/BEST WEIGHTS/yolo11m_Complete_dataset_1_best.pt",
-    r"/Users/jot/Documents/MASTEROPPGAVE/BEST WEIGHTS/yolo11l_Complete_dataset_1_best.pt",
-    r"/Users/jot/Documents/MASTEROPPGAVE/BEST WEIGHTS/yolo11x_Complete_dataset_1_best.pt",
-]
+   r"weights"]
 
-VIDEO_PATH = r"/Users/jot/Downloads/Video filer/Batch9/tp74back_D18_T1444-1501.mp4"
+VIDEO_PATH = r"videopath"
 IMGSZ = 640
 WARMUP_FRAMES = 100
 MEASURE_FRAMES = 2000
