@@ -13,7 +13,7 @@ from datetime import datetime
 
 from ultralytics import settings, YOLO
 
-DATASET_YAML = "/content/gdrive/MyDrive/Colab Notebooks/datasets/dataset_2/dataset.yaml" #Path to dataset folder. 
+DATASET_YAML = "Path_to_dataset" #Path to dataset folder. 
 
 # Defines three different folder locations in google drive where the script stores, weights, validations and runs. 
 WEIGHTS_DIR = Path("/content/gdrive/MyDrive/Colab Notebooks/weights")          
