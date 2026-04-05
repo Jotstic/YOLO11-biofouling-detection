@@ -19,7 +19,7 @@ BASE_URL   = (_getenv("BIIGLE_BASE_URL", "https://biigle.de") or "").rstrip("/")
 VOLUME_ID  = int(_getenv("BIIGLE_VOLUME_ID", "26581") or "26581")             
 USERNAME   = _getenv("BIIGLE_USERNAME")                                    
 API_TOKEN  = _getenv("BIIGLE_API_TOKEN")                                     
-CONF_THR   = float(_getenv("CONF_THRESH", "0.30") or "0.30")                 
+CONF_THR   = float(_getenv("CONF_THRESH", "0.25") or "0.25")                 
 DRY_RUN    = (_getenv("DRY_RUN", "0") == "1")                                
 MAX_IMAGES = int(_getenv("MAX_IMAGES", "0") or "0")                       
 
