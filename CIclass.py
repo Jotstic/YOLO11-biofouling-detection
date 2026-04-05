@@ -16,10 +16,7 @@ IMG_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"}
 METRIC_KEYS = ["precision", "recall", "map50", "map50_95"]
 
 
-# -----------------------------
 # Paths / YAML
-# -----------------------------
-
 def resolve_weights_path(p: Path) -> Path:
     """
     Accepts:
@@ -148,10 +145,7 @@ def write_boot_yaml(base_yaml: Path, out_yaml: Path, test_list_txt: Path):
         yaml.safe_dump(ds, f, sort_keys=False)
 
 
-# -----------------------------
 # Metrics extraction (per-class)
-# -----------------------------
-
 def _safe_to_1d(arr_like):
     """Convert to flat float numpy array, or empty array if missing."""
     if arr_like is None:
@@ -211,10 +205,7 @@ def percentile_ci_nan(vals: list[float], alpha: float = 0.05) -> tuple[float, fl
     return lo, hi
 
 
-# -----------------------------
 # Bootstrap CI (per class)
-# -----------------------------
-
 def bootstrap_ci_per_class(
     model: YOLO,
     resolved_yaml: Path,
@@ -244,6 +235,7 @@ def bootstrap_ci_per_class(
     tmp = outdir / "tmp_boot"
     tmp.mkdir(parents=True, exist_ok=True)
 
+    
     # store bootstrap reps per metric per class
     reps = {
         k: [[] for _ in range(n_classes)]
@@ -269,7 +261,7 @@ def bootstrap_ci_per_class(
             device=device,
             workers=workers,
             verbose=False,
-            cache=False,  # more stable for repeated evals
+            cache=False,  
             project=project,
             name=f"{run_name}_boot",
             exist_ok=True,
@@ -293,10 +285,7 @@ def bootstrap_ci_per_class(
     return ci_out
 
 
-# -----------------------------
-# Main
-# -----------------------------
-
+# Main arguments 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", required=True, help="Path to dataset.yaml (ONE dataset)")
@@ -337,7 +326,7 @@ def main():
     print(f"Classes: {n_classes}")
     print(f"Weights: {weights}")
 
-    # Point estimate (one run)
+    # Point estimate one run
     m_full = model.val(
         data=str(resolved_yaml),
         split="test",
@@ -359,7 +348,7 @@ def main():
     raw_path = outdir / f"raw_results_dict_{run_name}.json"
     raw_path.write_text(json.dumps(per_full["raw_results_dict"], indent=2), encoding="utf-8")
 
-    # Bootstrap CI (optional)
+    # Bootstrap CI optional
     if args.n_boot > 0:
         ci = bootstrap_ci_per_class(
             model=model,
@@ -384,7 +373,7 @@ def main():
             for k in METRIC_KEYS
         }
 
-    # Build rows (one row per class)
+    # Build rows one row per class
     rows = []
     for i, cname in enumerate(class_names):
         row = {
