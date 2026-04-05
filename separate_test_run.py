@@ -11,17 +11,17 @@ from ultralytics import YOLO
 # CONFIGURATION
 # ============================================================
 
-MODEL_PATH = "/Users/jot/Documents/MASTEROPPGAVE/BEST WEIGHTS/yolo11s_Complete_dataset_1_best.pt"
+MODEL_PATH = "model_weight_path"
 
-DATASET_ROOT = "/Users/jot/Documents/MASTEROPPGAVE/datasets/test_dataset"
+DATASET_ROOT = "Path_to_dataset"
 DATASET_YAML = f"{DATASET_ROOT}/dataset.yaml"
 
 IMG_DIR = f"{DATASET_ROOT}/images/test"
 GT_DIR  = f"{DATASET_ROOT}/labels/test"
 
 # ✅ Put EVERYTHING under this root
-RUNS_ROOT = "/Users/jot/Documents/MASTEROPPGAVE/Separate test runs"
-RUN_NAME  = ""  # folder inside RUNS_ROOT
+RUNS_ROOT = "Path_to_save_the_runs"
+RUN_NAME  = "name_to_folder"  # folder inside RUNS_ROOT
 
 OUTPUT_ROOT = os.path.join(RUNS_ROOT, RUN_NAME)
 
@@ -146,12 +146,12 @@ def main():
         print(f"  {i}: {name_of(i)}")
     print()
 
-    # ---- load model ----
+    # load model
     print("Loading model...")
     model = YOLO(MODEL_PATH)
     print(" Model loaded.\n")
 
-    # ---- predict (save txt) ----
+    # predict (save txt) 
     print("Running prediction on test images...\n")
 
     # clear old pred txts to avoid stale files
@@ -185,7 +185,7 @@ def main():
 
     print(f"Prediction labels saved to: {PRED_DIR}\n")
 
-    # ---- evaluate ----
+    # evaluate 
     print("Evaluating model...\n")
     val_results = model.val(
         data=DATASET_YAML,
@@ -251,7 +251,7 @@ def main():
     print("  -", METRIC_TXT)
     print()
 
-    # ---- count instances ----
+    # count instances
     print("Counting GT vs Pred instances...\n")
 
     gt_counts = {i: 0 for i in range(nc)}
@@ -280,7 +280,7 @@ def main():
     df_counts.to_csv(CLASS_COUNT_PATH, index=False)
     print("Counts saved to:", CLASS_COUNT_PATH, "\n")
 
-    # ---- comparison images ----
+    # comparison images
     print("Creating comparison images (GT left / Pred right)...\n")
 
     for img_path in image_list:
