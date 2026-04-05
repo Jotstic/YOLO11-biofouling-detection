@@ -6,7 +6,7 @@ import yaml
 # --------------------------------------------------
 # 1. PATHS
 # --------------------------------------------------
-SRC = Path("/Users/jot/Documents/MASTEROPPGAVE/datasets/test_dataset")
+SRC = Path("Path_to_dataset")
 DST = SRC.parent / "test_dataset1"
 
 if DST.exists():
