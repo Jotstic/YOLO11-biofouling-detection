@@ -112,7 +112,7 @@ def plot_from_csv(
         lows[:, j] = df[f"{m}_ci_low"].astype(float).to_numpy()
         highs[:, j] = df[f"{m}_ci_high"].astype(float).to_numpy()
 
-    # yerr shape for matplotlib = (2, N)
+    
     yerr = np.stack([means - lows, highs - means], axis=0)
 
     x = np.arange(n_classes)
@@ -164,7 +164,7 @@ def plot_from_csv(
                 fontweight="bold",
                 rotation=90,
             )
-# ── END BAR LABELS SNIPPET ─────────────────────────────────────────────────
+# END BAR LABELS SNIPPET
 
             
 
