@@ -38,7 +38,7 @@ from PIL import Image
 
 BASE_URL = os.getenv("BIIGLE_BASE_URL", "https://biigle.de").rstrip("/")
 
-USERNAME = os.getenv("Joakim.tjernet@gmail.com")
+USERNAME = os.getenv("mail")
 API_TOKEN = os.getenv("python")
 
 # New: allow multiple volumes via BIIGLE_VOLUME_IDS="123,456,789"
