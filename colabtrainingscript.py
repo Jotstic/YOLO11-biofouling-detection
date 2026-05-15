@@ -42,7 +42,7 @@ COMMON_TRAIN_ARGS = dict(
     hsv_s=0.2,
     hsv_v=0.1,
     fliplr=0.5,
-    patience=20,
+    patience=25,
     seed=SEED,
     
 )
