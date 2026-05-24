@@ -68,7 +68,7 @@ python3 "$SCRIPT" run \
   --pix-fmt yuv444p \
   --jpeg-q 2 \
   --extract-workers 2 \
-  --out-w 800 --out-h 600 --resize-mode fit
+  --out-w 800 --out-h 450 --resize-mode fit
 
 python3 "$SCRIPT" audit-duplicates \
   "$BASE_OUT" \
